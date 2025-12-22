@@ -1,0 +1,333 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Retro Arcade Neon Theme for Police Chase Game */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Custom Neon Colors */
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff00ff;
+  --neon-yellow: #ffff00;
+  --neon-red: #ff3366;
+  --neon-green: #39ff14;
+  --neon-orange: #ff6600;
+  --neon-blue: #0066ff;
+  --bg-dark: #0a0a0f;
+  --bg-darker: #050508;
+  --grid-color: rgba(0, 245, 255, 0.1);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: #0a0a0f;
+  --foreground: #e0e0e0;
+  --card: #12121a;
+  --card-foreground: #e0e0e0;
+  --popover: #12121a;
+  --popover-foreground: #e0e0e0;
+  --primary: #00f5ff;
+  --primary-foreground: #0a0a0f;
+  --secondary: #1a1a2e;
+  --secondary-foreground: #00f5ff;
+  --muted: #16161f;
+  --muted-foreground: #888899;
+  --accent: #ff00ff;
+  --accent-foreground: #ffffff;
+  --destructive: #ff3366;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 245, 255, 0.2);
+  --input: rgba(0, 245, 255, 0.1);
+  --ring: #00f5ff;
+  --chart-1: #00f5ff;
+  --chart-2: #ff00ff;
+  --chart-3: #ffff00;
+  --chart-4: #ff3366;
+  --chart-5: #39ff14;
+  --sidebar: #0a0a0f;
+  --sidebar-foreground: #e0e0e0;
+  --sidebar-primary: #00f5ff;
+  --sidebar-primary-foreground: #0a0a0f;
+  --sidebar-accent: #1a1a2e;
+  --sidebar-accent-foreground: #00f5ff;
+  --sidebar-border: rgba(0, 245, 255, 0.2);
+  --sidebar-ring: #00f5ff;
+}
+
+.dark {
+  --background: #0a0a0f;
+  --foreground: #e0e0e0;
+  --card: #12121a;
+  --card-foreground: #e0e0e0;
+  --popover: #12121a;
+  --popover-foreground: #e0e0e0;
+  --primary: #00f5ff;
+  --primary-foreground: #0a0a0f;
+  --secondary: #1a1a2e;
+  --secondary-foreground: #00f5ff;
+  --muted: #16161f;
+  --muted-foreground: #888899;
+  --accent: #ff00ff;
+  --accent-foreground: #ffffff;
+  --destructive: #ff3366;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 245, 255, 0.2);
+  --input: rgba(0, 245, 255, 0.1);
+  --ring: #00f5ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Orbitron', sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Neon Text Effects */
+  .neon-text-cyan {
+    color: #00f5ff;
+    text-shadow: 
+      0 0 5px #00f5ff,
+      0 0 10px #00f5ff,
+      0 0 20px #00f5ff,
+      0 0 40px #00f5ff;
+  }
+
+  .neon-text-magenta {
+    color: #ff00ff;
+    text-shadow: 
+      0 0 5px #ff00ff,
+      0 0 10px #ff00ff,
+      0 0 20px #ff00ff,
+      0 0 40px #ff00ff;
+  }
+
+  .neon-text-yellow {
+    color: #ffff00;
+    text-shadow: 
+      0 0 5px #ffff00,
+      0 0 10px #ffff00,
+      0 0 20px #ffff00;
+  }
+
+  .neon-text-red {
+    color: #ff3366;
+    text-shadow: 
+      0 0 5px #ff3366,
+      0 0 10px #ff3366,
+      0 0 20px #ff3366;
+  }
+
+  /* Neon Border Effects */
+  .neon-border-cyan {
+    border: 2px solid #00f5ff;
+    box-shadow: 
+      0 0 5px #00f5ff,
+      0 0 10px #00f5ff,
+      inset 0 0 5px rgba(0, 245, 255, 0.1);
+  }
+
+  .neon-border-magenta {
+    border: 2px solid #ff00ff;
+    box-shadow: 
+      0 0 5px #ff00ff,
+      0 0 10px #ff00ff,
+      inset 0 0 5px rgba(255, 0, 255, 0.1);
+  }
+
+  /* Arcade Button Style */
+  .arcade-button {
+    background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%);
+    border: 3px solid #00f5ff;
+    color: #00f5ff;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    box-shadow: 
+      0 0 10px #00f5ff,
+      0 0 20px rgba(0, 245, 255, 0.3),
+      inset 0 0 10px rgba(0, 245, 255, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .arcade-button:hover {
+    background: linear-gradient(180deg, #2a2a4e 0%, #1a1a2e 100%);
+    box-shadow: 
+      0 0 15px #00f5ff,
+      0 0 30px rgba(0, 245, 255, 0.5),
+      inset 0 0 15px rgba(0, 245, 255, 0.2);
+    transform: scale(1.02);
+  }
+
+  .arcade-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Scanline Effect */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* Grid Background */
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Pulse Animation */
+  @keyframes neon-pulse {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.8;
+      filter: brightness(1.2);
+    }
+  }
+
+  .neon-pulse {
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+
+  /* Flicker Animation */
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+    }
+    20%, 24%, 55% {
+      opacity: 0.6;
+    }
+  }
+
+  .neon-flicker {
+    animation: flicker 3s linear infinite;
+  }
+
+  /* Game Canvas Container */
+  .game-container {
+    background: #050508;
+    border: 4px solid #00f5ff;
+    box-shadow: 
+      0 0 20px #00f5ff,
+      0 0 40px rgba(0, 245, 255, 0.3),
+      inset 0 0 60px rgba(0, 245, 255, 0.05);
+    border-radius: 8px;
+  }
+
+  /* HUD Style */
+  .hud-panel {
+    background: rgba(10, 10, 15, 0.9);
+    border: 2px solid rgba(0, 245, 255, 0.5);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Pixel Font for Scores */
+  .pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 0.05em;
+  }
+}
