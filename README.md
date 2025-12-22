@@ -1,6 +1,6 @@
 # 🚓 Escape Driver
 
-![Escape Driver Gameplay](assets/preview.png)
+![Escape Driver Gameplay](assets/gameplay.webp.png)
 
 > **Un juego de persecución policial arcade de alta velocidad con estética retro neón.**
 
