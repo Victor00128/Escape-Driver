@@ -1,98 +1,96 @@
-# 🚓 Escape Driver
+# Escape Driver
 
 ![Escape Driver Gameplay](assets/gameplay.webp.png)
 
-> **Un juego de persecución policial arcade de alta velocidad con estética retro neón.**
+> Juego arcade de persecucion policial con estetica retro neon, construido para priorizar ritmo, control y supervivencia.
 
-**Escape Driver** es un juego de acción desarrollado con React y Canvas donde tu objetivo es sobrevivir tanto tiempo como sea posible mientras la intensidad de la persecución policial aumenta. ¡Derrapa, usa power-ups y haz que los policías choquen entre sí para lograr la puntuación más alta!
+**Escape Driver** es un juego de accion desarrollado con React y Canvas donde tu objetivo es sobrevivir tanto tiempo como sea posible mientras la intensidad de la persecucion policial aumenta. Derrapa, usa power-ups y haz que los policias choquen entre si para lograr la puntuacion mas alta.
 
----
+## Como jugar
 
-## 🎮 Cómo Jugar
-
-El objetivo es simple: **No dejes que te atrapen.**
+El objetivo es simple: **no dejes que te atrapen**.
 
 ### Controles
 
-| Acción | Teclado |
+| Accion | Teclado |
 | :--- | :--- |
-| **Moverse** | `Flechas` o `WASD` |
-| **Drift / Derrape** | `Barra Espaciadora` |
-| **Pausar** | `P` |
-| **Silenciar** | Botón en pantalla |
+| Moverse | `Flechas` o `WASD` |
+| Drift / Derrape | `Barra espaciadora` |
+| Pausar | `P` |
+| Silenciar | Boton en pantalla |
 
-### Consejos Pro
-*   💡 **Drifting:** Usa el espacio para girar más rápido en las curvas cerradas.
-*   🔥 **Combos:** Haz que los coches de policía choquen entre sí para ganar puntos extra y limpiar el mapa.
-*   ⭐ **Estrellas:** Al igual que en GTA, cuanto más tiempo sobrevivas y más destrucción causes, más agresiva será la policía (Sistema de 1 a 5 estrellas).
+### Consejos
 
----
+- Usa el espacio para girar mas rapido en curvas cerradas.
+- Haz que los coches de policia choquen entre si para sumar puntos y limpiar el mapa.
+- Cuanto mas tiempo sobrevives, mas agresiva se vuelve la policia.
 
-## ⚡ Power-ups
+## Power-ups
 
-Recoge estos ítem en el mapa para obtener ventajas tácticas:
+- `Turbo`: aumenta la velocidad maxima x1.8.
+- `Escudo`: te vuelve invulnerable temporalmente.
+- `Iman`: atrae monedas cercanas automaticamente.
+- `Bomba`: destruye al policia mas cercano.
 
-- **⚡ Turbo (Cyan):** Aumenta tu velocidad máxima x1.8 para escapar de situaciones difíciles.
-- **🛡️ Escudo (Verde):** Te hace invulnerable al daño por colisión temporalmente.
-- **🧲 Imán (Magenta):** Atrae todas las monedas cercanas hacia ti automáticamente.
-- **💣 Bomba (Rojo):** Destruye al policía más cercano instantáneamente (¡Úsalo sabiamente, es raro!).
+## Dificultades
 
----
-
-## 🏆 Dificultades
-
-| Nivel | Descripción | Reto |
+| Nivel | Descripcion | Reto |
 | :--- | :--- | :--- |
-| **Normal** | 4 Policías | Sobrevivir 2 min |
-| **Difícil** | 6 Policías | Sobrevivir 3 min |
-| **Imposible** | 8 Policías | Sobrevivir 4 min |
+| Normal | 4 policias | Sobrevivir 2 min |
+| Dificil | 6 policias | Sobrevivir 3 min |
+| Imposible | 8 policias | Sobrevivir 4 min |
 
----
+## Tecnologias
 
-## 🛠️ Tecnologías
+- Frontend: React + TypeScript
+- Build tool: Vite
+- Graficos: HTML5 Canvas API
+- Estilos: Tailwind CSS v4
+- Audio: Web Audio API
+- UI: Radix UI y Lucide React
 
-Este proyecto ha sido construido utilizando tecnologías web modernas:
+## Instalacion y ejecucion
 
-- **Frontend:** [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool:** [Vite](https://vitejs.dev/)
-- **Gráficos:** HTML5 Canvas API (Renderizado de alto rendimiento)
-- **Estilos:** [TailwindCSS v4](https://tailwindcss.com/)
-- **Audio:** Web Audio API (Efectos de sonido sintetizados en tiempo real, sin archivos mp3 externos)
-- **UI Components:** Radix UI & Lucide React
+```bash
+git clone https://github.com/Victor00128/Escape-Driver.git
+cd Escape-Driver
+npm install --legacy-peer-deps
+npm run dev
+```
 
----
+Abre el navegador en `http://localhost:5173`.
 
-## 🚀 Instalación y Ejecución
+## Configuracion opcional
 
-Sigue estos pasos para correr el juego en tu máquina local:
+El juego puede arrancar sin configuracion extra. Si quieres habilitar integraciones opcionales, crea un archivo `.env` basandote en `.env.example`.
 
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone https://github.com/tu-usuario/escape-driver.git
-    cd escape-driver
-    ```
+Variables disponibles:
 
-2.  **Instalar dependencias:**
-    ```bash
-    npm install --legacy-peer-deps
-    ```
+- `VITE_OAUTH_PORTAL_URL`
+- `VITE_APP_ID`
+- `VITE_FRONTEND_FORGE_API_KEY`
+- `VITE_FRONTEND_FORGE_API_URL`
+- `VITE_ANALYTICS_ENDPOINT`
+- `VITE_ANALYTICS_WEBSITE_ID`
 
-3.  **Iniciar el servidor de desarrollo:**
-    ```bash
-    npm run dev
-    ```
-
-4.  **Jugar:**
-    Abre tu navegador en `http://localhost:3000`
-
----
-
-## 🏅 Logros
+## Logros
 
 El juego cuenta con un sistema de logros persistente guardado en el navegador:
-*   🪙 **Primera Moneda:** Recoge tu primera moneda.
-*   💨 **Rey del Drift:** Mantén un derrape por 30 segundos acumulados.
-*   🔥 **Reacción en Cadena:** Haz que 3 policías exploten simultáneamente.
-*   🛡️ **Intocable:** Gana una partida sin perder ninguna vida.
-*   ... ¡Y muchos más!
 
+- Primera moneda: recoge tu primera moneda.
+- Rey del drift: manten un derrape por 30 segundos acumulados.
+- Reaccion en cadena: haz que 3 policias exploten simultaneamente.
+- Intocable: gana una partida sin perder ninguna vida.
+
+## Estado actual
+
+Esta version publica prioriza:
+
+- gameplay rapido y arcade
+- presentacion visual fuerte
+- progresion por supervivencia
+- una base lista para seguir puliendo
+
+## Licencia
+
+MIT. Ver el archivo [LICENSE](LICENSE).
