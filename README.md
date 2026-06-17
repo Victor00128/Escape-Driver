@@ -2,54 +2,54 @@
 
 ![Escape Driver Gameplay](assets/gameplay.webp.png)
 
-> Juego arcade de persecucion policial con estetica retro neon, construido para priorizar ritmo, control y supervivencia.
+> A retro-neon police-chase arcade game, built to put pace, control, and survival first.
 
-**Escape Driver** es un juego de accion desarrollado con React y Canvas donde tu objetivo es sobrevivir tanto tiempo como sea posible mientras la intensidad de la persecucion policial aumenta. Derrapa, usa power-ups y haz que los policias choquen entre si para lograr la puntuacion mas alta.
+**Escape Driver** is an action game built with React and Canvas where your goal is to survive as long as possible while the police chase grows more intense. Drift, use power-ups, and make the cops crash into each other to reach the highest score.
 
-## Como jugar
+## How to play
 
-El objetivo es simple: **no dejes que te atrapen**.
+The goal is simple: **don't let them catch you**.
 
-### Controles
+### Controls
 
-| Accion | Teclado |
+| Action | Keyboard |
 | :--- | :--- |
-| Moverse | `Flechas` o `WASD` |
-| Drift / Derrape | `Barra espaciadora` |
-| Pausar | `P` |
-| Silenciar | Boton en pantalla |
+| Move | `Arrows` or `WASD` |
+| Drift | `Spacebar` |
+| Pause | `P` |
+| Mute | On-screen button |
 
-### Consejos
+### Tips
 
-- Usa el espacio para girar mas rapido en curvas cerradas.
-- Haz que los coches de policia choquen entre si para sumar puntos y limpiar el mapa.
-- Cuanto mas tiempo sobrevives, mas agresiva se vuelve la policia.
+- Use space to turn faster on tight corners.
+- Make police cars crash into each other to score points and clear the map.
+- The longer you survive, the more aggressive the police become.
 
 ## Power-ups
 
-- `Turbo`: aumenta la velocidad maxima x1.8.
-- `Escudo`: te vuelve invulnerable temporalmente.
-- `Iman`: atrae monedas cercanas automaticamente.
-- `Bomba`: destruye al policia mas cercano.
+- `Turbo`: boosts top speed by x1.8.
+- `Shield`: makes you temporarily invulnerable.
+- `Magnet`: automatically pulls in nearby coins.
+- `Bomb`: destroys the nearest police car.
 
-## Dificultades
+## Difficulties
 
-| Nivel | Descripcion | Reto |
+| Level | Description | Challenge |
 | :--- | :--- | :--- |
-| Normal | 4 policias | Sobrevivir 2 min |
-| Dificil | 6 policias | Sobrevivir 3 min |
-| Imposible | 8 policias | Sobrevivir 4 min |
+| Normal | 4 police | Survive 2 min |
+| Hard | 6 police | Survive 3 min |
+| Impossible | 8 police | Survive 4 min |
 
-## Tecnologias
+## Tech stack
 
 - Frontend: React + TypeScript
 - Build tool: Vite
-- Graficos: HTML5 Canvas API
-- Estilos: Tailwind CSS v4
+- Graphics: HTML5 Canvas API
+- Styling: Tailwind CSS v4
 - Audio: Web Audio API
-- UI: Radix UI y Lucide React
+- UI: Radix UI and Lucide React
 
-## Instalacion y ejecucion
+## Install & run
 
 ```bash
 git clone https://github.com/Victor00128/Escape-Driver.git
@@ -58,13 +58,13 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-Abre el navegador en `http://localhost:5173`.
+Open your browser at `http://localhost:5173`.
 
-## Configuracion opcional
+## Optional configuration
 
-El juego puede arrancar sin configuracion extra. Si quieres habilitar integraciones opcionales, crea un archivo `.env` basandote en `.env.example`.
+The game runs with no extra configuration. If you want to enable optional integrations, create a `.env` file based on `.env.example`.
 
-Variables disponibles:
+Available variables:
 
 - `VITE_OAUTH_PORTAL_URL`
 - `VITE_APP_ID`
@@ -73,24 +73,24 @@ Variables disponibles:
 - `VITE_ANALYTICS_ENDPOINT`
 - `VITE_ANALYTICS_WEBSITE_ID`
 
-## Logros
+## Achievements
 
-El juego cuenta con un sistema de logros persistente guardado en el navegador:
+The game has a persistent achievement system saved in the browser:
 
-- Primera moneda: recoge tu primera moneda.
-- Rey del drift: manten un derrape por 30 segundos acumulados.
-- Reaccion en cadena: haz que 3 policias exploten simultaneamente.
-- Intocable: gana una partida sin perder ninguna vida.
+- First coin: collect your first coin.
+- Drift king: hold a drift for 30 seconds total.
+- Chain reaction: make 3 police cars explode simultaneously.
+- Untouchable: win a run without losing a single life.
 
-## Estado actual
+## Current status
 
-Esta version publica prioriza:
+This public version prioritizes:
 
-- gameplay rapido y arcade
-- presentacion visual fuerte
-- progresion por supervivencia
-- una base lista para seguir puliendo
+- fast, arcade gameplay
+- strong visual presentation
+- survival-based progression
+- a base ready to keep polishing
 
-## Licencia
+## License
 
-MIT. Ver el archivo [LICENSE](LICENSE).
+MIT. See the [LICENSE](LICENSE) file.
