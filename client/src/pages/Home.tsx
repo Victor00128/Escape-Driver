@@ -7,7 +7,7 @@ export default function Home() {
   const [highScore, setHighScore] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem("escapeDriver_highScore");
+    const saved = localStorage.getItem("escape_hs");
     if (saved) setHighScore(parseInt(saved));
   }, []);
 
