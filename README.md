@@ -10,11 +10,10 @@
 
 This version is a major overhaul of the original prototype:
 
-- **Living procedural city** — every run generates a new metropolis: building blocks with lit windows, parks with trees, parking lots, plazas and water. Buildings are **solid obstacles** you and the police must navigate around.
+- **Open neon arena** — a wide, obstacle-free map built for pure high-speed pursuit: nothing to crash into, just you, the cops and open ground. A reference grid and scattered decorative zones keep your bearings as you weave and escape.
 - **Real engine sound** — the engine is synthesized live with the Web Audio API: layered harmonics, combustion noise, a turbo whine and **two-tone police sirens** that rise with your wanted level. No audio files, zero load time.
 - **2026 cars** — detailed top-down vehicles with gradient bodies, cockpits, LED head/tail-lights, alloy wheels and turbo flames. Pick from **4 selectable hypercar models**, each with its own paint and underglow.
 - **Smarter police AI** — patrols coordinate with distinct roles (pursuer, interceptor, flankers and blocker) to **surround and cut you off** instead of trailing in a line. They predict your path, attempt PIT-style rams, steer around buildings and call in reinforcements as your wanted level climbs.
-- **Civilian traffic** — ambient cars drive the avenues; clip one and you'll feel the bump.
 - **Juice** — particle sparks and debris, persistent drift marks, screen shake, a wanted-level red/blue vignette, an upgraded minimap and a speedometer.
 
 ## How to play
@@ -35,7 +34,7 @@ The goal is simple: **survive until the timer hits zero.** Don't let the police 
 - Keep your speed up — at full throttle you can outrun the patrols on open avenues.
 - Use the handbrake to whip around tight corners without losing momentum.
 - Bait patrol cars into crashing into each other for big points and breathing room.
-- Buildings are walls. Use them to shake pursuers — but don't slam into one yourself.
+- Watch the minimap — patrols flank from several sides at once, so always keep an escape lane open.
 
 ## Power-ups
 
@@ -69,7 +68,7 @@ As you survive longer and wreck more patrols, your **wanted level** (1–5 stars
 client/src/
   game/
     audio.ts      # synthesized engine, turbo, sirens & SFX
-    city.ts       # procedural city generator
+    city.ts       # open-map / arena generator
     vehicles.ts   # 2026 car & police rendering
     engine.ts     # game state, simulation, AI, collisions & canvas render
   pages/

@@ -8,7 +8,6 @@ import {
   City,
   MAP,
   BLOCK,
-  ROAD_W,
   Solid,
   playerSpawn,
   randomRoadPoint,
@@ -607,43 +606,9 @@ function updateCops(g: Game, dt: number, solids: Solid[]) {
 }
 
 // ---------- tráfico civil ----------
-function updateTraffic(g: Game, dt: number, audio: GameAudio) {
-  const p = g.player;
-  g.trafficTimer -= dt * 16.67;
-  const want = 10;
-  if (g.trafficTimer <= 0 && g.traffic.length < want) {
-    g.trafficTimer = 600;
-    // aparece sobre una avenida, lejos del jugador
-    const cols = Math.round(MAP / BLOCK);
-    let x: number, y: number, angle: number;
-    if (Math.random() < 0.5) {
-      x = Math.floor(Math.random() * cols) * BLOCK + (Math.random() < 0.5 ? -ROAD_W / 4 : ROAD_W / 4);
-      y = Math.random() * MAP; angle = Math.random() < 0.5 ? Math.PI / 2 : -Math.PI / 2;
-    } else {
-      y = Math.floor(Math.random() * cols) * BLOCK + (Math.random() < 0.5 ? -ROAD_W / 4 : ROAD_W / 4);
-      x = Math.random() * MAP; angle = Math.random() < 0.5 ? 0 : Math.PI;
-    }
-    if (Math.hypot(x - p.x, y - p.y) > 600) {
-      const colors = ["#c0392b", "#2980b9", "#16a085", "#f39c12", "#bdc3c7", "#8e44ad", "#34495e"];
-      g.traffic.push({ x, y, angle, spd: 2 + Math.random() * 2, color: colors[Math.floor(Math.random() * colors.length)], id: Date.now() });
-    }
-  }
-  g.traffic = g.traffic.filter((t) => {
-    t.x += Math.cos(t.angle) * t.spd * dt;
-    t.y += Math.sin(t.angle) * t.spd * dt;
-    // colisión con el jugador (golpe, sin quitar vida)
-    const d = Math.hypot(t.x - p.x, t.y - p.y);
-    if (d < CAR * 0.95 && g.invincible <= 0) {
-      const n = Math.atan2(p.y - t.y, p.x - t.x);
-      p.x += Math.cos(n) * (CAR * 0.95 - d);
-      p.y += Math.sin(n) * (CAR * 0.95 - d);
-      p.speed *= 0.5;
-      g.shake = Math.max(g.shake, 120);
-      addParticles(g, (t.x + p.x) / 2, (t.y + p.y) / 2, 5, "#ffaa33", "spark", 2.5);
-      audio.play("crash");
-    }
-    return t.x > -120 && t.x < MAP + 120 && t.y > -120 && t.y < MAP + 120;
-  });
+// Mapa libre: sin tráfico (era un obstáculo). Mantiene la lista vacía.
+function updateTraffic(g: Game, _dt: number, _audio: GameAudio) {
+  if (g.traffic.length) g.traffic = [];
 }
 
 // ============================================================================
@@ -663,21 +628,30 @@ export function draw(ctx: CanvasRenderingContext2D, g: Game, canvas: HTMLCanvasE
   ctx.fillStyle = "#101019";
   ctx.fillRect(0, 0, W, H);
 
-  // suelo de las manzanas
-  const groundColor: Record<string, string> = {
-    grass: "#16361f", parking: "#1b1b26", plaza: "#23232f", water: "#0e2a4a", concrete: "#1a1a24",
-  };
+  // zonas decorativas transitables (césped / plazas) — sin marco, no bloquean
   for (const lot of g.city.lots) {
     if (!inView(lot.x + lot.w / 2, lot.y + lot.h / 2, lot.w)) continue;
-    // acera
-    ctx.fillStyle = "#33333f";
-    ctx.fillRect(lot.x - camX, lot.y - camY, lot.w, lot.h);
-    // suelo interno
-    ctx.fillStyle = groundColor[lot.ground] || "#1a1a24";
-    ctx.fillRect(lot.x - camX + 16, lot.y - camY + 16, lot.w - 32, lot.h - 32);
+    const lx = lot.x - camX + 8, ly = lot.y - camY + 8, lw = lot.w - 16, lh = lot.h - 16;
+    ctx.fillStyle = lot.ground === "grass" ? "#163420" : "#20202e";
+    ctx.fillRect(lx, ly, lw, lh);
+    ctx.strokeStyle = lot.ground === "grass" ? "rgba(70,170,100,0.22)" : "rgba(120,140,200,0.16)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(lx, ly, lw, lh);
   }
 
-  // líneas de carril sobre las avenidas
+  // cuadrícula fina de referencia (sensación de velocidad en campo abierto)
+  ctx.strokeStyle = "rgba(120,140,200,0.06)";
+  ctx.lineWidth = 1;
+  const FINE = 180;
+  const fx0 = Math.floor(camX / FINE) * FINE, fy0 = Math.floor(camY / FINE) * FINE;
+  for (let gx = fx0; gx < camX + W + FINE; gx += FINE) {
+    ctx.beginPath(); ctx.moveTo(gx - camX, 0); ctx.lineTo(gx - camX, H); ctx.stroke();
+  }
+  for (let gy = fy0; gy < camY + H + FINE; gy += FINE) {
+    ctx.beginPath(); ctx.moveTo(0, gy - camY); ctx.lineTo(W, gy - camY); ctx.stroke();
+  }
+
+  // avenidas principales (líneas guía)
   ctx.strokeStyle = "rgba(236,201,75,0.5)";
   ctx.lineWidth = 2;
   ctx.setLineDash([14, 18]);
