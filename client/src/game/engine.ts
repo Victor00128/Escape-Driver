@@ -315,12 +315,12 @@ export function simulate(g: Game, dt: number, keys: Set<string>, audio: GameAudi
   if (res.hit) {
     const dot = mvx * res.nx + mvy * res.ny;
     const impact = Math.max(0, -dot);
-    if (impact > 5 && g.invincible <= 0) {
+    if (impact > 7 && g.invincible <= 0) {
       audio.play("crash");
-      g.shake = Math.max(g.shake, 180);
-      addParticles(g, nx, ny, 8, "#ffcc44", "spark", impact * 0.4);
+      g.shake = Math.max(g.shake, 110);
+      addParticles(g, nx, ny, 6, "#ffcc44", "spark", impact * 0.35);
     }
-    p.speed *= impact > 5 ? 0.4 : 0.82; // pierde velocidad al rozar
+    p.speed *= impact > 7 ? 0.6 : 0.93; // roces apenas frenan; solo golpes fuertes penalizan
   }
   // límites del mapa
   if (nx < R) { nx = R; p.speed *= 0.5; }
