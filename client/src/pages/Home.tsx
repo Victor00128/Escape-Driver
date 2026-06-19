@@ -7,7 +7,7 @@ export default function Home() {
   const [highScore, setHighScore] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem("escapeDriver_highScore");
+    const saved = localStorage.getItem("escape_hs");
     if (saved) setHighScore(parseInt(saved));
   }, []);
 
@@ -125,7 +125,7 @@ export default function Home() {
 
         {/* Footer */}
         <p className="mt-12 text-[#444455] text-xs tracking-wider" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-          © 2024 ESCAPE DRIVER
+          © 2026 ESCAPE DRIVER
         </p>
       </div>
 
