@@ -3,3 +3,9 @@ node_modules
 .git
 *.min.js
 *.min.css
+
+# Generado por pnpm: se reescribe en cada install y no debe llevar formato propio
+pnpm-lock.yaml
+
+# Parches: el formato es parte del contenido, tocarlo los invalida
+patches
