@@ -14,13 +14,48 @@ export interface CarPaint {
 
 // modelos seleccionables del jugador (hiperdeportivos 2026)
 export const PAINTS: CarPaint[] = [
-  { id: "velocity", name: "VELOCITY X", body: "#1ec8ff", body2: "#0a6cff", accent: "#e6faff", glow: "#00e5ff" },
-  { id: "inferno", name: "INFERNO GT", body: "#ff5a2c", body2: "#c0220c", accent: "#ffd9a0", glow: "#ff6a00" },
-  { id: "toxic", name: "TOXIC EV", body: "#9dff3c", body2: "#2fae20", accent: "#eaffd0", glow: "#7dff00" },
-  { id: "phantom", name: "PHANTOM", body: "#c46bff", body2: "#7a1fd6", accent: "#f3e0ff", glow: "#c34bff" },
+  {
+    id: "velocity",
+    name: "VELOCITY X",
+    body: "#1ec8ff",
+    body2: "#0a6cff",
+    accent: "#e6faff",
+    glow: "#00e5ff",
+  },
+  {
+    id: "inferno",
+    name: "INFERNO GT",
+    body: "#ff5a2c",
+    body2: "#c0220c",
+    accent: "#ffd9a0",
+    glow: "#ff6a00",
+  },
+  {
+    id: "toxic",
+    name: "TOXIC EV",
+    body: "#9dff3c",
+    body2: "#2fae20",
+    accent: "#eaffd0",
+    glow: "#7dff00",
+  },
+  {
+    id: "phantom",
+    name: "PHANTOM",
+    body: "#c46bff",
+    body2: "#7a1fd6",
+    accent: "#f3e0ff",
+    glow: "#c34bff",
+  },
 ];
 
-function roundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+function roundRectPath(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+) {
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
 }
@@ -30,7 +65,13 @@ export function drawPlayerCar(
   ctx: CanvasRenderingContext2D,
   paint: CarPaint,
   len: number,
-  opts: { braking: boolean; turbo: boolean; shield: number; magnet: number; t: number }
+  opts: {
+    braking: boolean;
+    turbo: boolean;
+    shield: number;
+    magnet: number;
+    t: number;
+  }
 ) {
   const w = len * 0.52;
   const hl = len / 2;
@@ -257,7 +298,11 @@ export function drawPoliceCar(
 }
 
 // ---- carro civil de tráfico ----
-export function drawTrafficCar(ctx: CanvasRenderingContext2D, len: number, color: string) {
+export function drawTrafficCar(
+  ctx: CanvasRenderingContext2D,
+  len: number,
+  color: string
+) {
   const w = len * 0.5;
   const hl = len / 2;
   const hw = w / 2;

@@ -1,5 +1,13 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { CAR, DIFFS, MAP, createGame, simulate, type Diff, type Game } from "./engine";
+import {
+  CAR,
+  DIFFS,
+  MAP,
+  createGame,
+  simulate,
+  type Diff,
+  type Game,
+} from "./engine";
 import type { GameAudio } from "./audio";
 import type { CarPaint } from "./vehicles";
 
@@ -33,7 +41,11 @@ function audioMudo(): GameAudio {
   } as unknown as GameAudio;
 }
 
-const PINTURA = { body: "#e11", roof: "#111", glass: "#9cf" } as unknown as CarPaint;
+const PINTURA = {
+  body: "#e11",
+  roof: "#111",
+  glass: "#9cf",
+} as unknown as CarPaint;
 
 function nuevaPartida(diff: Diff = "normal"): Game {
   return createGame(diff, PINTURA, []);

@@ -52,7 +52,8 @@ export class GameAudio {
   init() {
     if (this.ctx) return;
     try {
-      this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      this.ctx = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
       this.noiseBuf = makeNoiseBuffer(this.ctx);
       this.master = this.ctx.createGain();
       this.master.gain.value = this.muted ? 0 : 0.6;
@@ -71,7 +72,11 @@ export class GameAudio {
   toggleMute() {
     this.muted = !this.muted;
     if (this.master && this.ctx)
-      this.master.gain.setTargetAtTime(this.muted ? 0 : 0.6, this.ctx.currentTime, 0.02);
+      this.master.gain.setTargetAtTime(
+        this.muted ? 0 : 0.6,
+        this.ctx.currentTime,
+        0.02
+      );
     return this.muted;
   }
 
@@ -115,7 +120,7 @@ export class GameAudio {
       { mult: 3, type: "square" as OscillatorType, gain: 0.16 },
       { mult: 4.5, type: "sawtooth" as OscillatorType, gain: 0.1 },
     ];
-    harmonics.forEach((h) => {
+    harmonics.forEach(h => {
       const o = ctx.createOscillator();
       o.type = h.type;
       o.frequency.value = 60 * h.mult;
@@ -136,7 +141,7 @@ export class GameAudio {
     this.jitterG = ctx.createGain();
     this.jitterG.gain.value = 3;
     this.jitter.connect(this.jitterG);
-    this.oscs.forEach((o) => this.jitterG!.connect(o.frequency));
+    this.oscs.forEach(o => this.jitterG!.connect(o.frequency));
     this.jitter.start(t);
 
     // ruido de combustión (aire/escape) filtrado por banda
@@ -260,11 +265,19 @@ export class GameAudio {
         0.05
       );
     if (this.engBus)
-      this.engBus.gain.setTargetAtTime(0.16 + opts.throttle * 0.14 + r * 0.08, now, 0.05);
+      this.engBus.gain.setTargetAtTime(
+        0.16 + opts.throttle * 0.14 + r * 0.08,
+        now,
+        0.05
+      );
     if (this.engNoiseBP)
       this.engNoiseBP.frequency.setTargetAtTime(baseFreq * 3 + 120, now, 0.05);
     if (this.engNoiseG)
-      this.engNoiseG.gain.setTargetAtTime(0.03 + opts.throttle * 0.08, now, 0.05);
+      this.engNoiseG.gain.setTargetAtTime(
+        0.03 + opts.throttle * 0.08,
+        now,
+        0.05
+      );
 
     // turbo
     if (this.turboG && this.turbo && this.turboNoiseG && this.turboBP) {
@@ -272,27 +285,44 @@ export class GameAudio {
       this.turboG.gain.setTargetAtTime(tv, now, 0.08);
       this.turbo.frequency.setTargetAtTime(700 + r * 1600, now, 0.06);
       this.turboBP.frequency.setTargetAtTime(1600 + r * 1800, now, 0.06);
-      this.turboNoiseG.gain.setTargetAtTime(opts.turbo ? 0.02 + r * 0.03 : 0, now, 0.1);
+      this.turboNoiseG.gain.setTargetAtTime(
+        opts.turbo ? 0.02 + r * 0.03 : 0,
+        now,
+        0.1
+      );
     }
 
     // derrape
     if (this.skidG && this.skidBP) {
-      const sv = opts.drifting && Math.abs(opts.speed) > 2 ? 0.06 + r * 0.05 : 0;
+      const sv =
+        opts.drifting && Math.abs(opts.speed) > 2 ? 0.06 + r * 0.05 : 0;
       this.skidG.gain.setTargetAtTime(sv, now, 0.03);
-      this.skidBP.frequency.setTargetAtTime(1200 + Math.random() * 500, now, 0.02);
+      this.skidBP.frequency.setTargetAtTime(
+        1200 + Math.random() * 500,
+        now,
+        0.02
+      );
     }
 
     // sirena: gana volumen con el nivel de búsqueda
     if (this.sirenG && this.sirenLfo) {
       this.sirenG.gain.setTargetAtTime(opts.wanted * 0.5, now, 0.2);
-      this.sirenLfo.frequency.setTargetAtTime(0.8 + opts.wanted * 1.6, now, 0.3);
+      this.sirenLfo.frequency.setTargetAtTime(
+        0.8 + opts.wanted * 1.6,
+        now,
+        0.3
+      );
     }
   }
 
   setPaused(p: boolean) {
     if (!this.ctx || !this.master) return;
     // baja todo el volumen al pausar (sin matar los osciladores)
-    this.master.gain.setTargetAtTime(this.muted ? 0 : p ? 0.05 : 0.6, this.ctx.currentTime, 0.05);
+    this.master.gain.setTargetAtTime(
+      this.muted ? 0 : p ? 0.05 : 0.6,
+      this.ctx.currentTime,
+      0.05
+    );
   }
 
   stopDrive() {
@@ -318,10 +348,16 @@ export class GameAudio {
       this.sirenOsc2,
       this.sirenLfo,
       ...this.oscs,
-    ].forEach((n) => kill(n as any));
+    ].forEach(n => kill(n as any));
     this.oscs = [];
     this.oscGains = [];
-    this.sub = this.jitter = this.engNoise = this.turbo = this.turboNoise = this.skid = null;
+    this.sub =
+      this.jitter =
+      this.engNoise =
+      this.turbo =
+      this.turboNoise =
+      this.skid =
+        null;
     this.sirenOsc1 = this.sirenOsc2 = this.sirenLfo = null;
     this.engBus = null;
   }
@@ -345,7 +381,8 @@ export class GameAudio {
       const g = ctx.createGain();
       o.type = wave;
       o.frequency.setValueAtTime(from, t);
-      if (to !== from) o.frequency.exponentialRampToValueAtTime(Math.max(1, to), t + dur);
+      if (to !== from)
+        o.frequency.exponentialRampToValueAtTime(Math.max(1, to), t + dur);
       g.gain.setValueAtTime(vol, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + dur);
       o.connect(g);
@@ -354,14 +391,24 @@ export class GameAudio {
       o.stop(t + dur + 0.02);
     };
 
-    const noise = (dur: number, vol: number, type: BiquadFilterType, freq: number, sweep = 0) => {
+    const noise = (
+      dur: number,
+      vol: number,
+      type: BiquadFilterType,
+      freq: number,
+      sweep = 0
+    ) => {
       if (!noiseBuf) return;
       const s = ctx.createBufferSource();
       s.buffer = noiseBuf;
       const f = ctx.createBiquadFilter();
       f.type = type;
       f.frequency.setValueAtTime(freq, t);
-      if (sweep) f.frequency.exponentialRampToValueAtTime(Math.max(40, freq + sweep), t + dur);
+      if (sweep)
+        f.frequency.exponentialRampToValueAtTime(
+          Math.max(40, freq + sweep),
+          t + dur
+        );
       const g = ctx.createGain();
       g.gain.setValueAtTime(vol, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + dur);

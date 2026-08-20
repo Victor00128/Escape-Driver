@@ -22,12 +22,12 @@ The goal is simple: **survive until the timer hits zero.** Don't let the police 
 
 ### Controls
 
-| Action | Keyboard |
-| :--- | :--- |
-| Drive | `Arrows` or `WASD` |
-| Handbrake / Drift | `Spacebar` |
-| Pause | `P` |
-| Mute | On-screen button |
+| Action            | Keyboard           |
+| :---------------- | :----------------- |
+| Drive             | `Arrows` or `WASD` |
+| Handbrake / Drift | `Spacebar`         |
+| Pause             | `P`                |
+| Mute              | On-screen button   |
 
 ### Tips
 
@@ -45,11 +45,11 @@ The goal is simple: **survive until the timer hits zero.** Don't let the police 
 
 ## Difficulties
 
-| Level | Description | Challenge |
-| :--- | :--- | :--- |
-| Normal | 4 police | Survive 2 min |
-| Hard | 6 police | Survive 3 min |
-| Impossible | 8 police | Survive 4 min |
+| Level      | Description | Challenge     |
+| :--------- | :---------- | :------------ |
+| Normal     | 4 police    | Survive 2 min |
+| Hard       | 6 police    | Survive 3 min |
+| Impossible | 8 police    | Survive 4 min |
 
 As you survive longer and wreck more patrols, your **wanted level** (1–5 stars) rises: more patrols spawn, they drive faster and upgrade from sedans to interceptors to armored SWAT units.
 
