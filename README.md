@@ -78,14 +78,27 @@ client/src/
 
 ## Install & run
 
+Requires Node.js 22.13 or newer and pnpm 11.
+
 ```bash
 git clone https://github.com/Victor00128/Escape-Driver.git
 cd Escape-Driver
-npm install --legacy-peer-deps
-npm run dev
+corepack enable
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 Open your browser at `http://localhost:3000`.
+
+## Quality checks
+
+```bash
+pnpm run lint
+pnpm run check
+pnpm run format:check
+pnpm test
+pnpm run build
+```
 
 ## Achievements
 

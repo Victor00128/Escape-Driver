@@ -48,6 +48,19 @@ const EMPTY_HUD: Hud = {
   newAch: null,
 };
 
+function readAchievements(): string[] {
+  try {
+    const parsed: unknown = JSON.parse(
+      localStorage.getItem("escape_achievements") || "[]"
+    );
+    return Array.isArray(parsed)
+      ? parsed.filter((value): value is string => typeof value === "string")
+      : [];
+  } catch {
+    return [];
+  }
+}
+
 function snapshot(g: GameState): Hud {
   return {
     lives: g.lives,
@@ -123,9 +136,7 @@ export default function Game() {
     (d: Diff) => {
       audio.init();
       audio.resume();
-      const saved = JSON.parse(
-        localStorage.getItem("escape_achievements") || "[]"
-      );
+      const saved = readAchievements();
       gameRef.current = createGame(d, PAINTS[paintIdx], saved);
       audio.startDrive();
       audio.setPaused(false);
@@ -158,6 +169,11 @@ export default function Game() {
       setPhase("playing");
     }
   }, [setPhase]);
+
+  const setControlKey = useCallback((key: string, pressed: boolean) => {
+    if (pressed) keys.current.add(key);
+    else keys.current.delete(key);
+  }, []);
 
   // ---------- teclado ----------
   useEffect(() => {
@@ -193,9 +209,7 @@ export default function Game() {
   // ===================== MENÚ =====================
   if (phase === "menu") {
     const hs = parseInt(localStorage.getItem("escape_hs") || "0");
-    const achs = JSON.parse(
-      localStorage.getItem("escape_achievements") || "[]"
-    ) as string[];
+    const achs = readAchievements();
     const paint = PAINTS[paintIdx];
     return (
       <div className="min-h-screen bg-[#0a0a12] flex flex-col items-center justify-center p-4">
@@ -384,8 +398,13 @@ export default function Game() {
         </div>
       </div>
 
-      <div className="relative border-4 border-[#1f2937] rounded-lg overflow-hidden shadow-2xl shadow-[#00f5ff]/10">
-        <canvas ref={canvasRef} width={960} height={600} className="block" />
+      <div className="relative w-full max-w-[960px] aspect-[8/5] border-4 border-[#1f2937] rounded-lg overflow-hidden shadow-2xl shadow-[#00f5ff]/10">
+        <canvas
+          ref={canvasRef}
+          width={960}
+          height={600}
+          className="block w-full h-full"
+        />
 
         {phase === "paused" && (
           <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center">
@@ -478,9 +497,58 @@ export default function Game() {
         )}
       </div>
 
+      {(phase === "playing" || phase === "paused") && (
+        <div
+          className="mt-3 grid grid-cols-3 gap-2 md:hidden select-none touch-none"
+          aria-label="Controles táctiles"
+        >
+          <span aria-hidden="true" />
+          <button
+            type="button"
+            aria-label="Acelerar"
+            className="min-w-16 min-h-12 rounded-lg border border-[#00ffff] bg-black/80 text-xl text-[#00ffff]"
+            onPointerDown={() => setControlKey("arrowup", true)}
+            onPointerUp={() => setControlKey("arrowup", false)}
+            onPointerCancel={() => setControlKey("arrowup", false)}
+            onPointerLeave={() => setControlKey("arrowup", false)}
+          >
+            ▲
+          </button>
+          <button
+            type="button"
+            aria-label="Derrapar"
+            className="min-w-16 min-h-12 rounded-lg border border-[#ff00ff] bg-black/80 text-xs font-bold text-[#ff00ff]"
+            onPointerDown={() => setControlKey(" ", true)}
+            onPointerUp={() => setControlKey(" ", false)}
+            onPointerCancel={() => setControlKey(" ", false)}
+            onPointerLeave={() => setControlKey(" ", false)}
+          >
+            DERRAPE
+          </button>
+          {[
+            ["arrowleft", "Girar a la izquierda", "◀"],
+            ["arrowdown", "Frenar o retroceder", "▼"],
+            ["arrowright", "Girar a la derecha", "▶"],
+          ].map(([key, label, icon]) => (
+            <button
+              key={key}
+              type="button"
+              aria-label={label}
+              className="min-w-16 min-h-12 rounded-lg border border-[#ecc94b] bg-black/80 text-xl text-[#ecc94b]"
+              onPointerDown={() => setControlKey(key, true)}
+              onPointerUp={() => setControlKey(key, false)}
+              onPointerCancel={() => setControlKey(key, false)}
+              onPointerLeave={() => setControlKey(key, false)}
+            >
+              {icon}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* minimapa */}
       {(phase === "playing" || phase === "paused") && (
-        <div className="fixed bottom-3 right-3 w-32 h-32 bg-black/80 border-2 border-[#4a5568] rounded-lg overflow-hidden">
+        <div className="fixed bottom-3 right-3 hidden sm:block w-32 h-32 bg-black/80 border-2 border-[#4a5568] rounded-lg overflow-hidden">
           <canvas
             width={128}
             height={128}
@@ -538,7 +606,7 @@ export default function Game() {
         </div>
       )}
 
-      <div className="mt-1 text-[#475569] text-xs">
+      <div className="mt-1 hidden md:block text-[#475569] text-xs">
         <span className="text-[#ecc94b]">↑↓←→</span> conducir ·{" "}
         <span className="text-[#00ffff]">ESPACIO</span> derrape ·{" "}
         <span className="text-[#ecc94b]">P</span> pausa ·{" "}

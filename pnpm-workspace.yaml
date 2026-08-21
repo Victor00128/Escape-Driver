@@ -14,6 +14,11 @@ patchedDependencies:
 
 overrides:
   tailwindcss>nanoid: 3.3.7
+  lodash: 4.18.1
+  lodash-es: 4.18.1
+  path-to-regexp: 0.1.13
+  postcss: 8.5.23
+  tar: 7.5.22
 
 # Los scripts de instalación están bloqueados por defecto desde pnpm 10, y sin
 # permitirlos el install se queda esperando una aprobación manual que en CI no
