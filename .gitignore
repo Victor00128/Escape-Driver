@@ -104,3 +104,6 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+
+# Snapshots del propio arbol: el repositorio ya es la fuente
+*.zip
