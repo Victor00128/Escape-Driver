@@ -1,0 +1,28 @@
+# Configuración de pnpm.
+#
+# Vivía en el campo "pnpm" de package.json, que pnpm 11 ya no lee: avisa de que
+# ignora las claves y sigue adelante. El aviso importa porque sin
+# patchedDependencies el parche de wouter deja de aplicarse en silencio.
+# Aquí lo leen tanto pnpm 10 como pnpm 11.
+
+# Vacío a propósito: esto no es un monorepo, no hay sub-paquetes. pnpm 10 falla
+# con "packages field missing or empty" si el fichero existe sin esta clave.
+packages: []
+
+patchedDependencies:
+  wouter@3.7.1: patches/wouter@3.7.1.patch
+
+overrides:
+  tailwindcss>nanoid: 3.3.7
+
+# Los scripts de instalación están bloqueados por defecto desde pnpm 10, y sin
+# permitirlos el install se queda esperando una aprobación manual que en CI no
+# llega nunca. Las dos claves dicen lo mismo con distinto nombre; van ambas para
+# que el install siga siendo limpio si el proyecto vuelve a pnpm 10.
+onlyBuiltDependencies:
+  - "@tailwindcss/oxide"
+  - esbuild
+
+allowBuilds:
+  "@tailwindcss/oxide": true
+  esbuild: true
